@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuneSmith Local</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #764ba2;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #663d8f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .status {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .result-box {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .result-value {
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 TuneSmith Local</h1>
+        <p class="subtitle">AI-Powered Local Music Composition</p>
+
+        <!-- Composition Section -->
+        <div class="section">
+            <h2>1. Composition Parameters</h2>
+
+            <div class="form-group">
+                <label for="description">Description / Prompt</label>
+                <textarea id="description" placeholder="e.g., Upbeat pop song with catchy melody">A cheerful pop song perfect for summer</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="style">Style</label>
+                <select id="style">
+                    <option value="pop">Pop</option>
+                    <option value="rock">Rock</option>
+                    <option value="jazz">Jazz</option>
+                    <option value="electronic">Electronic</option>
+                    <option value="classical">Classical</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tempo">Tempo (BPM)</label>
+                <input type="number" id="tempo" value="120" min="60" max="200">
+            </div>
+
+            <div class="form-group">
+                <label for="key">Key</label>
+                <input type="text" id="key" value="C major" placeholder="e.g., C major, D minor">
+            </div>
+
+            <div class="form-group">
+                <label for="energy">Energy (0.0 - 1.0)</label>
+                <input type="number" id="energy" value="0.7" min="0" max="1" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration (bars)</label>
+                <input type="number" id="duration" value="8" min="2" max="64">
+            </div>
+
+            <div class="button-group">
+                <button class="btn-primary" onclick="generateTune()">Generate Tune</button>
+            </div>
+
+            <div id="generateStatus"></div>
+            <div id="generateResult"></div>
+        </div>
+
+        <!-- Rendering Section -->
+        <div class="section">
+            <h2>2. Render Audio</h2>
+            <p style="margin-bottom: 15px; color: #666;">Convert MIDI to audio</p>
+
+            <div class="button-group">
+                <button class="btn-primary" onclick="renderAudio()" id="renderBtn" disabled>Render Audio</button>
+                <button class="btn-secondary" onclick="playAudio()" id="playBtn" disabled>Play Audio</button>
+            </div>
+
+            <div id="renderStatus"></div>
+        </div>
+
+        <!-- Export Section -->
+        <div class="section">
+            <h2>3. Export Project</h2>
+
+            <div class="form-group">
+                <label for="exportFormat">Export Format</label>
+                <select id="exportFormat">
+                    <option value="midi">MIDI File</option>
+                    <option value="mix">WAV Mix</option>
+                    <option value="stems">WAV Stems</option>
+                    <option value="garageband">GarageBand Bundle</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exportPath">Export Path</label>
+                <input type="text" id="exportPath" value="/tmp/tunesmith_output" placeholder="/path/to/export">
+            </div>
+
+            <div class="button-group">
+                <button class="btn-success" onclick="exportProject()" id="exportBtn" disabled>Export</button>
+            </div>
+
+            <div id="exportStatus"></div>
+        </div>
+    </div>
+
+    <script>
+        const { invoke } = window.__TAURI__.core;
+
+        let hasGeneratedTune = false;
+        let hasRenderedAudio = false;
+
+        function showStatus(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+
+        async function generateTune() {
+            try {
+                showStatus('generateStatus', '⏳ Generating tune...', 'info');
+
+                const program = {
+                    version: 1,
+                    description: document.getElementById('description').value,
+                    style: document.getElementById('style').value,
+                    tempo: parseInt(document.getElementById('tempo').value),
+                    time_signature: [4, 4],
+                    key: document.getElementById('key').value,
+                    energy: parseFloat(document.getElementById('energy').value),
+                    duration_bars: parseInt(document.getElementById('duration').value),
+                    seed: null,
+                    instruments: ["Piano", "Bass", "Drums"]
+                };
+
+                const result = await invoke('generate_tune', { program });
+
+                hasGeneratedTune = true;
+                document.getElementById('renderBtn').disabled = false;
+
+                showStatus('generateStatus', '✅ Tune generated successfully!', 'success');
+                document.getElementById('generateResult').innerHTML = `
+                    <div class="result-box">
+                        <div class="result-item">
+                            <span class="result-label">Seed:</span>
+                            <span class="result-value">${result.seed}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Tracks:</span>
+                            <span class="result-value">${result.num_tracks}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Duration:</span>
+                            <span class="result-value">${result.duration_bars} bars</span>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                showStatus('generateStatus', `❌ Error: ${error}`, 'error');
+            }
+        }
+
+        async function renderAudio() {
+            try {
+                showStatus('renderStatus', '⏳ Rendering audio...', 'info');
+
+                const result = await invoke('render_audio');
+
+                hasRenderedAudio = true;
+                document.getElementById('playBtn').disabled = false;
+                document.getElementById('exportBtn').disabled = false;
+
+                showStatus('renderStatus', `✅ Audio rendered! Duration: ${result.duration_secs.toFixed(2)}s`, 'success');
+            } catch (error) {
+                showStatus('renderStatus', `❌ Error: ${error}`, 'error');
+            }
+        }
+
+        async function playAudio() {
+            try {
+                showStatus('renderStatus', '🔊 Playing audio...', 'info');
+                await invoke('play_audio');
+                showStatus('renderStatus', '✅ Playback complete!', 'success');
+            } catch (error) {
+                showStatus('renderStatus', `❌ Error: ${error}`, 'error');
+            }
+        }
+
+        async function exportProject() {
+            try {
+                showStatus('exportStatus', '⏳ Exporting...', 'info');
+
+                const format = document.getElementById('exportFormat').value;
+                const path = document.getElementById('exportPath').value;
+
+                await invoke('export_project', { format, outputPath: path });
+
+                showStatus('exportStatus', `✅ Exported successfully to ${path}`, 'success');
+            } catch (error) {
+                showStatus('exportStatus', `❌ Error: ${error}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

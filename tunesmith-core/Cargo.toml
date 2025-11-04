@@ -1,0 +1,56 @@
+[package]
+name = "tunesmith-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Audio and MIDI
+cpal = { workspace = true }
+midly = { workspace = true }
+dasp = { workspace = true }
+fundsp = { workspace = true }
+rubato = { workspace = true }
+hound = { workspace = true }
+
+# Synthesis
+rustysynth = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+schemars = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+
+# Async
+tokio = { workspace = true }
+
+# Concurrency
+crossbeam = { workspace = true }
+ringbuf = { workspace = true }
+
+# Random
+rand = { workspace = true }
+
+# Plist export
+plist = { workspace = true }
+
+# System info
+sysinfo = { workspace = true }
+
+# ONNX
+# ort = { workspace = true } # Commented out for MVP - will add when implementing LLM features
+
+[dev-dependencies]
+proptest = { workspace = true }
+tokio-test = "0.4"
+
+[features]
+default = []
