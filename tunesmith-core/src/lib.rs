@@ -6,6 +6,8 @@
 //! - Audio I/O (recording, playback)
 //! - VO processing (gate, ducking, basic effects)
 //! - Export (MIDI, WAV stems, GarageBand .band bundles)
+//! - Mood-based generation (for content creators)
+//! - Metadata and library management
 
 pub mod types;
 pub mod error;
@@ -15,6 +17,8 @@ pub mod audio;
 pub mod vo;
 pub mod export;
 pub mod utils;
+pub mod mood;
+pub mod metadata;
 
 // Re-export common types
 pub use error::{Error, Result};
